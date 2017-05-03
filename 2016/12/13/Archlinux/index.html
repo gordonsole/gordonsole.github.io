@@ -1,0 +1,768 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="arch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="系统篇首先进行磁盘分区：12# fdisk -l    //查看本地硬盘以及分区情况根据自己硬盘实际情况进行分区# fdisk /dev/sda  //对本地硬盘sda进行分区分区方法请自行google 在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区：1234# mke2fs -t ext4  /dev/sda1# mkswap /dev/sda2# sw">
+<meta name="keywords" content="arch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Archlinux">
+<meta property="og:url" content="http://yoursite.com/2016/12/13/Archlinux/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="系统篇首先进行磁盘分区：12# fdisk -l    //查看本地硬盘以及分区情况根据自己硬盘实际情况进行分区# fdisk /dev/sda  //对本地硬盘sda进行分区分区方法请自行google 在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区：1234# mke2fs -t ext4  /dev/sda1# mkswap /dev/sda2# sw">
+<meta property="og:updated_time" content="2017-05-01T13:30:45.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Archlinux">
+<meta name="twitter:description" content="系统篇首先进行磁盘分区：12# fdisk -l    //查看本地硬盘以及分区情况根据自己硬盘实际情况进行分区# fdisk /dev/sda  //对本地硬盘sda进行分区分区方法请自行google 在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区：1234# mke2fs -t ext4  /dev/sda1# mkswap /dev/sda2# sw">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/13/Archlinux/"/>
+
+
+
+
+
+  <title>Archlinux | Hexo</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/13/Archlinux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Archlinux
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-13T13:55:07+08:00">
+                2016-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/极客/" itemprop="url" rel="index">
+                    <span itemprop="name">极客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="系统篇"><a href="#系统篇" class="headerlink" title="系统篇"></a>系统篇</h1><h2 id="首先进行磁盘分区："><a href="#首先进行磁盘分区：" class="headerlink" title="首先进行磁盘分区："></a>首先进行磁盘分区：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># fdisk -l    <span class="comment">//查看本地硬盘以及分区情况根据自己硬盘实际情况进行分区</span></span></div><div class="line"><span class="meta"># fdisk /dev/sda  <span class="comment">//对本地硬盘sda进行分区分区方法请自行google</span></span></div></pre></td></tr></table></figure>
+<h2 id="在-dev-sda1建立ext4文件系统的主分区，在-dev-sda2建立swap交换区："><a href="#在-dev-sda1建立ext4文件系统的主分区，在-dev-sda2建立swap交换区：" class="headerlink" title="在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区："></a>在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># mke2fs -t ext4  /dev/sda1</div><div class="line"><span class="meta"># mkswap /dev/sda2</span></div><div class="line"><span class="meta"># swapon /dev/sda2</span></div><div class="line"># mke2fs -t ext4 /dev/sda3</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="挂载刚才建立的分区："><a href="#挂载刚才建立的分区：" class="headerlink" title="挂载刚才建立的分区："></a>挂载刚才建立的分区：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># mount -t ext4 /dev/sda1 /mnt    <span class="comment">//将sda1挂载到/mnt目录下(以/mnt为安装的根目录)</span></span></div><div class="line"><span class="meta"># mkdir /mnt/home</span></div><div class="line"><span class="meta"># mount -t ext4 /dev/sda3 /mnt/home</span></div></pre></td></tr></table></figure>
+<h2 id="修改软件源："><a href="#修改软件源：" class="headerlink" title="修改软件源："></a>修改软件源：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># nano /etc/pacman.d/mirrorlist</span></div><div class="line"># 编辑/etc/pacman.d/mirrorlist，先注释掉里面的所有行，然后在文件的最顶端添加</div><div class="line"># Server = http:<span class="comment">//mirrors.aliyun.com/archlinux/$repo/os/$arch</span></div><div class="line"># sed -i <span class="string">"s/^/#/g"</span>  /etc/pacman.d/mirrorlist  <span class="comment">//该命令可以使文件全部被注释，记得备份。</span></div></pre></td></tr></table></figure>
+<h2 id="安装基础包组件："><a href="#安装基础包组件：" class="headerlink" title="安装基础包组件："></a>安装基础包组件：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -Syy</span></div><div class="line"><span class="meta"># pacstrap -i /mnt base</span></div></pre></td></tr></table></figure>
+<h2 id="安装网络工具，否则安装完成之后无法配置无线网络："><a href="#安装网络工具，否则安装完成之后无法配置无线网络：" class="headerlink" title="安装网络工具，否则安装完成之后无法配置无线网络："></a>安装网络工具，否则安装完成之后无法配置无线网络：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacstrap -i /mnt wireless_tools wpa_supplicant dhclient  <span class="comment">//在没有有线条件下，这很重要。</span></span></div></pre></td></tr></table></figure>
+<h2 id="生成fstab文件："><a href="#生成fstab文件：" class="headerlink" title="生成fstab文件："></a>生成fstab文件：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># genfstab -U -p /mnt &gt; /mnt/etc/fstab</span></div></pre></td></tr></table></figure>
+<h2 id="chroot切换根目录："><a href="#chroot切换根目录：" class="headerlink" title="chroot切换根目录："></a>chroot切换根目录：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># arch-chroot /mnt</span></div></pre></td></tr></table></figure>
+<h2 id="设置国家及语言编码："><a href="#设置国家及语言编码：" class="headerlink" title="设置国家及语言编码："></a>设置国家及语言编码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># nano /etc/locale.gen</span></div><div class="line"><span class="meta"># echo <span class="meta-string">"export LANG=en_US.UTF-8"</span> &gt; /etc/locale.conf</span></div></pre></td></tr></table></figure>
+<h2 id="设置时区："><a href="#设置时区：" class="headerlink" title="设置时区："></a>设置时区：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># ln -s /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime    <span class="comment">//使用软链接来链接时区文件，时区配置可以放在完成系统安装后执行</span></span></div></pre></td></tr></table></figure>
+<h2 id="设置主机名："><a href="#设置主机名：" class="headerlink" title="设置主机名："></a>设置主机名：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># echo <span class="meta-string">"gordon"</span> &gt; /etc/hostname    <span class="comment">//主机名可以随便写</span></span></div></pre></td></tr></table></figure>
+<h2 id="设置root密码："><a href="#设置root密码：" class="headerlink" title="设置root密码："></a>设置root密码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># passwd root</span></div></pre></td></tr></table></figure>
+<h2 id="安装网络工具"><a href="#安装网络工具" class="headerlink" title="安装网络工具"></a>安装网络工具</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S net-tools <span class="comment">//安装网络工具,这样就可以使用dhcpd来自动获取ip了</span></span></div></pre></td></tr></table></figure>
+<h2 id="安装grub引导器："><a href="#安装grub引导器：" class="headerlink" title="安装grub引导器："></a>安装grub引导器：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S grub</span></div><div class="line"><span class="meta"># grub-install --recheck /dev/sda    <span class="comment">//将grub安装到整个硬盘作为引导器</span></span></div></pre></td></tr></table></figure>
+<h2 id="默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS："><a href="#默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS：" class="headerlink" title="默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS："></a>默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S os-prober</span></div></pre></td></tr></table></figure>
+<h2 id="生成grub的配置文件："><a href="#生成grub的配置文件：" class="headerlink" title="生成grub的配置文件："></a>生成grub的配置文件：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># grub-mkconfig -o /boot/grub/grub.cfg</span></div></pre></td></tr></table></figure>
+<h2 id="以上，基本安装结束。"><a href="#以上，基本安装结束。" class="headerlink" title="以上，基本安装结束。"></a>以上，基本安装结束。</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># exit</span></div><div class="line"><span class="meta"># umount /mnt</span></div><div class="line"><span class="meta"># reboot</span></div></pre></td></tr></table></figure>
+<h1 id="驱动篇"><a href="#驱动篇" class="headerlink" title="驱动篇"></a>驱动篇</h1><p>&emsp;&emsp;ArchLinux的安装是基于网络的，将ArchLinux安装在硬盘而不是虚拟机中时，则首先需要配置无线网络，配置完成无线网络之后才能正常执行安装流程。</p>
+<h2 id="使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡："><a href="#使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡：" class="headerlink" title="使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡："></a>使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># ip link set wlp3s0 up    <span class="comment">//网卡名称为wlp3s0</span></span></div></pre></td></tr></table></figure>
+<h2 id="扫描无线网络："><a href="#扫描无线网络：" class="headerlink" title="扫描无线网络："></a>扫描无线网络：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># iwlist wlp3s0 scanning</span></div></pre></td></tr></table></figure>
+<h2 id="创建wpa配置文件"><a href="#创建wpa配置文件" class="headerlink" title="创建wpa配置文件"></a>创建wpa配置文件</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># nano /etc/wpa_supplicant/wifi.conf</span></div></pre></td></tr></table></figure>
+<h2 id="在wifi-conf中写入要连接的无线配置信息："><a href="#在wifi-conf中写入要连接的无线配置信息：" class="headerlink" title="在wifi.conf中写入要连接的无线配置信息："></a>在wifi.conf中写入要连接的无线配置信息：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ctrl_interface=/var/run/wpa_supplicant</div><div class="line">network=&#123;</div><div class="line">       ssid=<span class="string">"要连接的无线的名字"</span></div><div class="line">       psk=<span class="string">"无线的密码"</span></div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+<h2 id="启用配置文件："><a href="#启用配置文件：" class="headerlink" title="启用配置文件："></a>启用配置文件：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># wpa_supplicant -B -i wlp3s0 -c /etc/wpa_supplicant/wifi.conf</div></pre></td></tr></table></figure>
+<h2 id="激活网络服务："><a href="#激活网络服务：" class="headerlink" title="激活网络服务："></a>激活网络服务：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># dhclient wlp3s0</span></div></pre></td></tr></table></figure>
+<h2 id="测试网络是否联通："><a href="#测试网络是否联通：" class="headerlink" title="测试网络是否联通："></a>测试网络是否联通：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ping www.baidu.com</div></pre></td></tr></table></figure>
+<p>&emsp;$emsp;以上配置无线网络的方法适用于在尚未安装桌面环境时的配置，当桌面环境完成安装后，可用NetworkManager搭配各大桌面的图形化前端来实现便捷的无线网络管理。</p>
+<h2 id="安装完成后开始添加用户："><a href="#安装完成后开始添加用户：" class="headerlink" title="安装完成后开始添加用户："></a>安装完成后开始添加用户：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># useradd -m -G wheel -s /bin/bash archie</span></div><div class="line">此命令会自动创建 archie 群组，并成为 archie 的默认登录群组。建议每一个用户都设置自己的默认群组，因为umask 默认值是 <span class="number">002</span>, 所以同一个默认群组的用户会有创建文件的写权限。</div></pre></td></tr></table></figure>
+<h2 id="通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码"><a href="#通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码" class="headerlink" title="通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码"></a>通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># passwd [用户名]</span></div></pre></td></tr></table></figure>
+<h2 id="安装sudo让普通用户执行root命令："><a href="#安装sudo让普通用户执行root命令：" class="headerlink" title="安装sudo让普通用户执行root命令："></a>安装sudo让普通用户执行root命令：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S sudo</span></div><div class="line"><span class="meta"># vi /etc/sudoers    <span class="comment">//编辑sudoers文件让普通用户能够以root权限执行命令</span></span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;Xorg 是 X11 窗口系统的一个开源实现。Xorg 在 Linux 用户中非常流行，已经成为图形用户程序的必备条件，所以大部分发行版都提供了它。详情参见 Xorg 维基文章或访问Xorg 网站。</p>
+<h2 id="在安装显卡驱动前，需要先安装Xorg服务"><a href="#在安装显卡驱动前，需要先安装Xorg服务" class="headerlink" title="在安装显卡驱动前，需要先安装Xorg服务"></a>在安装显卡驱动前，需要先安装Xorg服务</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S xorg-server xorg-xinit xorg-utils xorg-server-utils    <span class="comment">//不必完整安装xorg包组，只需安装核心组件即可！</span></span></div><div class="line">Note: Arch 提供了位于 /usr/share/X11/xorg.conf.d 的默认配置文件。通常情况下，用户无需进行额外的配置与修改即可正常使用。</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;Xorg 可以通过 /etc/X11/xorg.conf 或 /etc/xorg.conf 和位于 /etc/X11/xorg.conf.d/ 的配置文件配置。用户可以创建自己的配置文件，需要以 XX- 开头(XX 是数字)并以.conf 结尾(例如 10 在 20 之前读取)。<br>此外，显卡驱动可能提供了自动配置工具，例如 NVIDIA 提供了 nvidia-xconfig，ATI 提供了 aticonfig。 </p>
+<h2 id="Linux-内核包含了开源的视频驱动，支持硬件加速的-framebuffers。OpenGL-和-X11-的-2D-加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询："><a href="#Linux-内核包含了开源的视频驱动，支持硬件加速的-framebuffers。OpenGL-和-X11-的-2D-加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询：" class="headerlink" title="Linux 内核包含了开源的视频驱动，支持硬件加速的 framebuffers。OpenGL 和 X11 的 2D 加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询："></a>Linux 内核包含了开源的视频驱动，支持硬件加速的 framebuffers。OpenGL 和 X11 的 2D 加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ lspci | grep -e VGA -e <span class="number">3</span>D</div><div class="line">输入下面命令，查看所有开源驱动:</div><div class="line">$ pacman -Ss xf86-video | less</div></pre></td></tr></table></figure>
+<h2 id="安装开源驱动："><a href="#安装开源驱动：" class="headerlink" title="安装开源驱动："></a>安装开源驱动：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#  pacman -S <span class="meta-string">&lt;驱动包&gt;</span></span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果不用登陆管理器启动 X，需要安装软件包 xorg-xinit。startx 和 xinit 命令将启动 X 服务器和客户端(startx 脚本是更通用命令 xinit 的前端)。为了确定要运行的客户端，startx/xinit 先在用户目录解析 ~/.xinitrc 文件，如果 ~/.xinitrc 不存在，使用默认的 /etc/X11/xinit/xinitrc, 其中默认会使用 Twm 窗口管理器，Xclock 和 Xterm（需安装 xorg-twm, xorg-xclock 和 xterm）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">注意:</div><div class="line">    如果出现问题，请检查日志文件 /var/<span class="built_in">log</span>/Xorg<span class="number">.0</span>.<span class="built_in">log</span>. 看看有没有以(EE)(代表错误) 或 (WW) (代表警告)开头的内容。</div><div class="line">    如果 $HOME 中有空 .xinitrc 文件，请删除或修改它。否则 X 会显示空白屏幕，而且 Xorg<span class="number">.0</span>.<span class="built_in">log</span> 中没有任何错误。删除它会运行一个默认的环境。</div></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;AMD 的显卡驱动有两种：一是官方私有驱动 (catalystAUR)，二是开源驱动。AMD 的 Linux 驱动软件包 catalyst 驱动曾被命名为 fglrx (FireGL and Radeon X)。现在虽然改变了软件包名称，但内核模块文件名依然为以前的 fglrx.ko。因此，下文中任何提及 fglrx 都是指内核模块,而不是指软件包.Catalyst 曾被移出 Arch 官方支持，原因是对其质量与开发速度的不满。在短暂的回到官方支持后，该项目于2013年4月再次被丢弃，截止现在还没有进一步的消息。 与开源驱动相比，Catalyst 在 2D 与 3D 渲染和电源管理上更胜一筹，但缺乏高效的多显支持。Catalyst 支持芯片组 R600 及以上（Radeon HD 2xxx 或者更新）的 ATI/AMD Radeon 显卡。<br><code>说明：本文只介绍AMD显卡的闭源驱动安装方法，Nvidia显卡驱动的安装方法请自行wiki。</code><br>&emsp;&emsp;共有三种途径安装 Catalyst。第一种是用 Vi0L0（Arch非官方Catalyst维护人员）维护的软件库。此库包涵了所有可用的软件包。第二种方式就是通过AUR，Vi0L0 提供的 PKGBUILD 跟他用于构建他仓库的 PKGBUILD 完全一样。最后，你还可以直接通过 AMD 官方下载 Catalyst。<br>&emsp;&emsp;自 Catalyst 12.4，AMD 已将针对 Radeon HD 5xxx 和 Radeon HD 2xxx，3xxx 与 4xxx 显卡驱动分开开发，因此在你选择何种安装方式之前，应查看你的显卡型号。Radeon HD 2xxx，3xxx 和 4xxx 显卡用 legacy驱动，Radeon HD 5xxx（以及更新的）用普通 Catalyst。但无论你需要哪种驱动，都应安装 Catalyst utilities。本文采用AUR安装，其他两种方式请自行探索。<br>&emsp;&emsp;Arch用户软件仓库（Arch User Repository，AUR）是为用户而建、由用户主导的Arch软件仓库。AUR中的软件包以软件包生成脚本（PKGBUILD）的形式提供，用户自己通过makepkg生成包，再由pacman安装。创建AUR的初衷是方便用户维护和分享新软件包，并由官方定期从中挑选软件包进入community仓库。<br>&emsp;&emsp;许多官方仓库软件包都来自AUR。通过AUR，大家相互分享新的软件包生成脚本（PKGBUILD和其他相关文件）。用户还可以为软件包投票。如果一个软件包投票足够多、没有协议问题、打包质量好，那么它就很有希望被收录进官方[community]仓库（以后就可以直接通过pacman 或 abs 安装了）。</p>
+<h2 id="从AUR（即-unsupported-仓库）安装软件包并不很困难。步骤如下："><a href="#从AUR（即-unsupported-仓库）安装软件包并不很困难。步骤如下：" class="headerlink" title="从AUR（即[unsupported]仓库）安装软件包并不很困难。步骤如下："></a>从AUR（即[unsupported]仓库）安装软件包并不很困难。步骤如下：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">从AUR下载包含PKGBUILD和其他安装文件（比如 systemd 和补丁，通常不是实际代码）的ta	 r包。</div><div class="line">用命令 tar -xvf packagename.tar.gz 解包到一个仅用于编译AUR的空闲文件夹。</div><div class="line">验证PKGBUILD和其它相关文件,确保其中不含有恶意代码.</div><div class="line">在上述文件夹中运行 makepkg -sri. 命令会自动调用pacman解决依赖关系，然后下载代码     、编译并打包. 然后安装软件包，然后删除仅在编译时才需要的软件包。</div></pre></td></tr></table></figure>
+<h3 id="准备，首先确定必要的软件包组已经安装"><a href="#准备，首先确定必要的软件包组已经安装" class="headerlink" title="准备，首先确定必要的软件包组已经安装:"></a>准备，首先确定必要的软件包组已经安装:</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S --needed base-devel <span class="comment">//软件包组base-devel 是必须的，其中包括make和其他编译工具</span></span></div></pre></td></tr></table></figure>
+<h3 id="获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用-AUR-工具就下载到需要的编译文件。"><a href="#获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用-AUR-工具就下载到需要的编译文件。" class="headerlink" title="获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用 AUR 工具就下载到需要的编译文件。"></a>获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用 AUR 工具就下载到需要的编译文件。</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">从软件包信息页面点击“Download snapshot”（中文页面翻译做“下载快照”），保存压缩包到编译目录。以本文的foo软件包为例，压缩包名为“foo.tar.gz”（标准格式是“&lt;pkgname&gt;.tar.gz”）。</div><div class="line"></div><div class="line">从终端下载：</div><div class="line"></div><div class="line"> $ cd ~/builds</div><div class="line"> $ curl -L -O https:<span class="comment">//aur.archlinux.org/cgit/aur.git/snapshot/foo.tar.gz</span></div><div class="line"></div><div class="line">在<span class="string">"Package Details"</span>中，找到<span class="string">"Git Clone URL"</span>，然后下载 Git仓库：</div><div class="line"></div><div class="line"> $ cd ~/build-repos</div><div class="line"> $ git clone https:<span class="comment">//aur.archlinux.org/foo.git</span></div></pre></td></tr></table></figure>
+<h3 id="构建和安装软件包，切换到编译目录，解压缩构建文件。如果是-Git-方式获取，无需解压。"><a href="#构建和安装软件包，切换到编译目录，解压缩构建文件。如果是-Git-方式获取，无需解压。" class="headerlink" title="构建和安装软件包，切换到编译目录，解压缩构建文件。如果是 Git 方式获取，无需解压。"></a>构建和安装软件包，切换到编译目录，解压缩构建文件。如果是 Git 方式获取，无需解压。</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cd ~/builds</div><div class="line">$ tar -xvzf foo.tar.gz</div><div class="line">这时应该出现了一个新的名为“foo”的目录。进入目录并检查脚本文件：</div><div class="line">$ cd foo</div><div class="line">$ nano PKGBUILD</div><div class="line">$ nano foo.install</div><div class="line">接下来开始生成软件包。检查文件后，执行makepkg（以普通用户权限）：</div><div class="line">$ makepkg -sri</div><div class="line">-s/--syncdeps 表示自动执行pacman安装依赖关系。-r/--rmdeps 会在编译后删除不需要的编译时依赖。-i/--install 会安装软件包</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;Catalyst 由于其缓慢的更新而被人大为诟病。因升级 Xorg 而造成两者不兼容是稀松平常的事。也就意味着 Catalyst 用户要么自己编译 Xorg 的包要么使用一个只包含 Xorg 包的回溯软件库，该库中不提供更新版 Xorg 以确保兼容性。Vi0L0 提供好几个这样的库。 要启用上述软件库的话,记得在 pacman.conf 中的其他软件库之前（甚至在你的 catalyst 仓库前，如果你有的话）添加相应软件库（使用和 catalyst 库相同的 PGP 密匙）。</p>
+<h3 id="xorg117-Catalyst-不支持-xorg-server-1-18"><a href="#xorg117-Catalyst-不支持-xorg-server-1-18" class="headerlink" title="xorg117 Catalyst 不支持 xorg-server 1.18"></a>xorg117 Catalyst 不支持 xorg-server 1.18</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[xorg117]</div><div class="line">Server = http:<span class="comment">//catalyst.wirephire.com/repo/xorg117/$arch</span></div><div class="line">## Mirrors, <span class="keyword">if</span> the primary server does <span class="keyword">not</span> work <span class="keyword">or</span> is too slow:</div><div class="line">#Server = http:<span class="comment">//mirror.hactar.bz/Vi0L0/xorg117/$arch</span></div><div class="line">note:其他版本的xorg请参照wiki。</div></pre></td></tr></table></figure>
+<h2 id="安装闭源驱动"><a href="#安装闭源驱动" class="headerlink" title="安装闭源驱动"></a>安装闭源驱动</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># sudo pacman -Syy</span></div><div class="line"><span class="meta"># sudo pacman -Syu</span></div><div class="line">此时会遇到软件签名的问题，可以做如下处理：</div><div class="line"><span class="meta"># pacman-key -r 653c3094 <span class="comment">//密钥的后面8位</span></span></div><div class="line"><span class="meta"># pacman-key -f 653c3094</span></div><div class="line"><span class="meta"># pacman-key --lsign-key 653c3094</span></div><div class="line"># 从AUR软件库下载对应的catalyst，编辑PKGBUILD，安装相关依赖</div><div class="line"><span class="meta"># makepkg -sri</span></div></pre></td></tr></table></figure>
+<h2 id="配置-X"><a href="#配置-X" class="headerlink" title="配置 X"></a>配置 X</h2><p>&emsp;&emsp;你需要创建 xorg.conf 文件来配置 X。Catalyst 提供了 aticonfig 工具来创建和（或）修改此文件。 通过访问 ‘/etc/ati/amdpcsdb’ 文件它几乎能配置显卡的各项参数。了解完整的 aticonfig 配置选项可运行:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># aticonfig --initial -f</span></div><div class="line"># 启动时加载模块</div><div class="line"></div><div class="line"># 禁用 radeon 以防其自动加载。在 /etc/modprobe.d/modprobe.conf 里禁用radeon，同时保证它不被 /etc/modules-load.d/ 里的文件加载,添加‘blacklist radeon’到配置文件。</div><div class="line"></div><div class="line"># 接下来，使模块 fglrx 自动加载。添加 fglrx 到 /etc/modules-load.d/ 下已有的模块文件的新一行，或者创建一个新的模块文件并添加 fglrx。</div><div class="line"># 禁用内核级显示模式设置,添加 nomodeset 到/etc/<span class="keyword">default</span>/grub。</div><div class="line"><span class="meta"># grub-mkconfig -o /boot/grub/grub.cfg</span></div><div class="line"><span class="meta"># reboot</span></div></pre></td></tr></table></figure></p>
+<h2 id="检查安装是否成功"><a href="#检查安装是否成功" class="headerlink" title="检查安装是否成功"></a>检查安装是否成功</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ lsmod | grep fglrx <span class="comment">//若有输出, 则证明安装成功。</span></div><div class="line">$ 下面的命令可以输出你的显卡型号信息：</div><div class="line">$ fglrxinfo</div><div class="line">$ 运行以下命令检查直接渲染模式是否启用:</div><div class="line">$ glxinfo | grep <span class="string">"direct rendering"</span> <span class="comment">//若显示 "direct rendering: yes"，恭喜你，到位了! 若无 $ glxinfo 命令，安装 mesa-demos package。</span></div><div class="line">$ 对于 glxgears，你也可以使用：</div><div class="line">$ fgl_glxgears</div></pre></td></tr></table></figure>
+<h1 id="应用篇"><a href="#应用篇" class="headerlink" title="应用篇"></a>应用篇</h1><p>&emsp;&emsp;xorg提供了twm来管理窗口，不过功能比较简陋，我们需要选择其他的wm来配置自己的桌面环境。喜欢折腾的可以选择openbox或者fvwm2这类可定制性高的wm。先面讲一下kde和gnome的安装。</p>
+<h2 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S wqy-zenhei wqy-microhei <span class="comment">//微软的中文字体</span></span></div><div class="line"><span class="meta"># pacman -S ttf-dejavu    <span class="comment">//没有此字体，会使某些符号不够漂亮，建议在安装桌面环境时选择此字体作为桌面环境的默认依赖字体</span></span></div><div class="line"><span class="meta"># pacman -S adobe-source-code-pro-fonts    <span class="comment">//adobe出品的一款很适合编程的等宽字体</span></span></div></pre></td></tr></table></figure>
+<h2 id="安装Gnome，和catalyst存在兼容性问题。"><a href="#安装Gnome，和catalyst存在兼容性问题。" class="headerlink" title="安装Gnome，和catalyst存在兼容性问题。"></a>安装Gnome，和catalyst存在兼容性问题。</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># pacman -S gnome </div><div class="line"># pacman -S gnome gnome-extra</div><div class="line"># 安装图形界面之后，可能无法直接启动，需要配置以下文件：</div><div class="line">/etc/X11/xinit/xinitrc</div><div class="line">~/.xinitrc</div><div class="line">在文件内容中添加启动桌面指定环境的语句：exec startkde (以kde桌面环境为例)</div><div class="line">如果是gnome桌面环境，则添加语句：exec gnome-session</div><div class="line"># 使ArchLinux可以开机后自动执行图形界面：</div><div class="line"># systemctl enable gdm</div></pre></td></tr></table></figure>
+<h2 id="安装kde5"><a href="#安装kde5" class="headerlink" title="安装kde5"></a>安装kde5</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S kf5 kf5-aids  </span></div><div class="line"><span class="meta"># pacman -S plasma kdebase kdegraphics-ksnapshot gwenview  </span></div><div class="line"><span class="meta"># pacman -S kde-l10n-zh_cn  <span class="comment">//安装kde中文语言包 </span></span></div><div class="line"><span class="meta"># pacman -S sddm sddm-kcm  </span></div><div class="line"><span class="meta"># systemctl enable sddm</span></div></pre></td></tr></table></figure>
+<h2 id="安装其他软件包"><a href="#安装其他软件包" class="headerlink" title="安装其他软件包"></a>安装其他软件包</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S gtk-engines gtk2 gtk3 gnome-themes-standard gnome-icon-theme</span></div><div class="line"># 安装解压缩软件</div><div class="line"><span class="meta"># pacman -S p7zip zip unzip rar unrar </span></div><div class="line"><span class="meta"># pacman -S ntp</span></div><div class="line"># 安装NTP</div><div class="line"><span class="meta"># systemctl enable ntpd</span></div><div class="line"># 安装NetworkManager</div><div class="line"><span class="meta"># pacman -S networkmanager net-tools </span></div><div class="line"><span class="meta"># systemctl enable NetworkManager dhcpcd</span></div><div class="line"># 安装声音</div><div class="line"><span class="meta"># pacman -S alsa-utils pulseaudio pulseaudio-alsa libcanberra-pulse libcanberra-gstreamer jack2-dbus</span></div><div class="line"># 安装NTFS系统识别</div><div class="line"><span class="meta"># pacman -S ntfs-3g  </span></div><div class="line"># 安装fcitx输入法</div><div class="line"><span class="meta"># pacman -S fcitx </span></div><div class="line"><span class="meta"># pacman -S fcitx-rime  </span></div><div class="line"><span class="meta"># pacman -S fcitx-im  </span></div><div class="line"><span class="meta"># pacman -S kcm-fcitx</span></div><div class="line"># 新建配置文件，使之qt支持fcitx和中文环境</div><div class="line"><span class="meta"># cd /home/YourLoginName/  </span></div><div class="line"><span class="meta"># vim .xprofile</span></div><div class="line"># 加入以下内容</div><div class="line">      <span class="keyword">export</span> LANG=zh_CN.UTF<span class="number">-8</span>  </div><div class="line">      <span class="keyword">export</span> LC_ALL=zh_CN.UTF<span class="number">-8</span>  </div><div class="line">      <span class="keyword">export</span> GTK_IM_MODULE=fcitx  </div><div class="line">      <span class="keyword">export</span> QT_IM_MODULE=fcitx  </div><div class="line">      <span class="keyword">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></div><div class="line"># reboot</div></pre></td></tr></table></figure>
+<h2 id="安装firefox火狐浏览器："><a href="#安装firefox火狐浏览器：" class="headerlink" title="安装firefox火狐浏览器："></a>安装firefox火狐浏览器：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># pacman -S firefox firefox-i18n-zh-cn    <span class="comment">//安装- - 浏览器的同时安装中文汉化包</span></span></div><div class="line">安装fcitx输入法作为中文输入法：</div><div class="line"><span class="meta"># pacman -S fcitx-im</span></div><div class="line">为保证fcitx能够正常在各个环境中使用，安装：</div><div class="line"><span class="meta"># pacman -S fcitx-qt5</span></div><div class="line">推荐使用AUR里的搜狗拼音输入法：</div><div class="line"><span class="meta"># yaourt -S fcitx-sogoupinyin</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;Yaourt (Yet AnOther User Repository Tool)，是社区贡献的一个pacman的一个外壳。在pacman的基础上，它添加了AUR支持，帮助用户轻松从AUR的海量PKGBUILD中选择需要的软件进行编译安装。Yaourt的操作方式类似pacman，易于记忆使用。它提供诸如彩色输出、交互式搜索模式等一系列实用功能。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">首先安装yaourt，我们采用最简单的方法：</div><div class="line">在pacman配置文件最后添加yaourt的源</div><div class="line">$ sudo nano /etc/pacman.conf</div><div class="line">添加arch中文社区仓库：</div><div class="line">[archlinuxcn]</div><div class="line">SigLevel = Optional TrustAll</div><div class="line">Server = http:<span class="comment">//repo.archlinuxcn.org/$arch</span></div><div class="line">添加官方源：</div><div class="line">[archlinuxfr]</div><div class="line">Server = http:<span class="comment">//repo.archlinux.fr/$arch</span></div><div class="line">$ sudo pacman -Sy</div><div class="line">$ sudo pacman -S yaourt</div></pre></td></tr></table></figure></p>
+<h2 id="安装办公套件："><a href="#安装办公套件：" class="headerlink" title="安装办公套件："></a>安装办公套件：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">在KDE桌面环境中，通常使用calligra办公套件：</div><div class="line"><span class="meta"># pacman -S calligra</span></div><div class="line">在gnome桌面环境中，通常使用libreoffice办公套件：</div><div class="line"><span class="meta"># pacman -S libreoffice    <span class="comment">//不推荐在gnome桌面环境下安装libreoffcie-kde4这个包，会带来无关的kde依赖！</span></span></div><div class="line">考虑到和MS-office的兼容性问题，这里我们可以选择wps-office:(前提是配置了Arch Linux 中文社区仓库）</div><div class="line">$ sudo pacman -S wps-office ttf-wps-fonts</div></pre></td></tr></table></figure>
+<h2 id="安装下载工具："><a href="#安装下载工具：" class="headerlink" title="安装下载工具："></a>安装下载工具：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">常用的BT下载工具为transmission：</div><div class="line"><span class="meta"># pacman -S transmission-gtk    <span class="comment">//gnome及xfce等使用gtk图形库的桌面环境安装gtk版本#  pacman -S transmission-qt    //KDE桌面环境安装qt版本</span></span></div><div class="line"><span class="meta"># pacman -S transmission-cli    <span class="comment">//未安装桌面环境时使用命令行版本# pacman -S ktorrent    //ktorrent BT下载工具</span></span></div><div class="line">aria2是命令行下的常用的下载工具，能够支持 HTTP,FTP,BitTorrent,Metalink等多种协议：</div><div class="line"><span class="meta"># pacman -S aria2</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/arch/" rel="tag"># arch</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/24/William-Shakespeare/" rel="next" title="William-Shakespeare">
+                <i class="fa fa-chevron-left"></i> William-Shakespeare
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/25/海燕/" rel="prev" title="海燕">
+                海燕 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="John Doe" />
+          <p class="site-author-name" itemprop="name">John Doe</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统篇"><span class="nav-number">1.</span> <span class="nav-text">系统篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先进行磁盘分区："><span class="nav-number">1.1.</span> <span class="nav-text">首先进行磁盘分区：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-dev-sda1建立ext4文件系统的主分区，在-dev-sda2建立swap交换区："><span class="nav-number">1.2.</span> <span class="nav-text">在/dev/sda1建立ext4文件系统的主分区，在/dev/sda2建立swap交换区：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载刚才建立的分区："><span class="nav-number">1.3.</span> <span class="nav-text">挂载刚才建立的分区：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改软件源："><span class="nav-number">1.4.</span> <span class="nav-text">修改软件源：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装基础包组件："><span class="nav-number">1.5.</span> <span class="nav-text">安装基础包组件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装网络工具，否则安装完成之后无法配置无线网络："><span class="nav-number">1.6.</span> <span class="nav-text">安装网络工具，否则安装完成之后无法配置无线网络：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成fstab文件："><span class="nav-number">1.7.</span> <span class="nav-text">生成fstab文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chroot切换根目录："><span class="nav-number">1.8.</span> <span class="nav-text">chroot切换根目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置国家及语言编码："><span class="nav-number">1.9.</span> <span class="nav-text">设置国家及语言编码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置时区："><span class="nav-number">1.10.</span> <span class="nav-text">设置时区：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置主机名："><span class="nav-number">1.11.</span> <span class="nav-text">设置主机名：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置root密码："><span class="nav-number">1.12.</span> <span class="nav-text">设置root密码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装网络工具"><span class="nav-number">1.13.</span> <span class="nav-text">安装网络工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装grub引导器："><span class="nav-number">1.14.</span> <span class="nav-text">安装grub引导器：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS："><span class="nav-number">1.15.</span> <span class="nav-text">默认情况下ArchLinux的grub只能识别出ArchLinux自身，如果硬盘上有其它OS，需要安装os-prober才能正常识别出其它OS：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成grub的配置文件："><span class="nav-number">1.16.</span> <span class="nav-text">生成grub的配置文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以上，基本安装结束。"><span class="nav-number">1.17.</span> <span class="nav-text">以上，基本安装结束。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#驱动篇"><span class="nav-number">2.</span> <span class="nav-text">驱动篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡："><span class="nav-number">2.1.</span> <span class="nav-text">使用iwconfig命令查看无线网卡是否被正常驱动，并记录下无线网卡的名称。启动无线网卡：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描无线网络："><span class="nav-number">2.2.</span> <span class="nav-text">扫描无线网络：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建wpa配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">创建wpa配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在wifi-conf中写入要连接的无线配置信息："><span class="nav-number">2.4.</span> <span class="nav-text">在wifi.conf中写入要连接的无线配置信息：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用配置文件："><span class="nav-number">2.5.</span> <span class="nav-text">启用配置文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活网络服务："><span class="nav-number">2.6.</span> <span class="nav-text">激活网络服务：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试网络是否联通："><span class="nav-number">2.7.</span> <span class="nav-text">测试网络是否联通：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装完成后开始添加用户："><span class="nav-number">2.8.</span> <span class="nav-text">安装完成后开始添加用户：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码"><span class="nav-number">2.9.</span> <span class="nav-text">通过下列命令设置用户密码，虽然不是必须的，还是强烈建议设置密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装sudo让普通用户执行root命令："><span class="nav-number">2.10.</span> <span class="nav-text">安装sudo让普通用户执行root命令：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在安装显卡驱动前，需要先安装Xorg服务"><span class="nav-number">2.11.</span> <span class="nav-text">在安装显卡驱动前，需要先安装Xorg服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-内核包含了开源的视频驱动，支持硬件加速的-framebuffers。OpenGL-和-X11-的-2D-加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询："><span class="nav-number">2.12.</span> <span class="nav-text">Linux 内核包含了开源的视频驱动，支持硬件加速的 framebuffers。OpenGL 和 X11 的 2D 加速需要用户空间工具。如果不知道显卡类型，请执行如下命令进行查询：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开源驱动："><span class="nav-number">2.13.</span> <span class="nav-text">安装开源驱动：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从AUR（即-unsupported-仓库）安装软件包并不很困难。步骤如下："><span class="nav-number">2.14.</span> <span class="nav-text">从AUR（即[unsupported]仓库）安装软件包并不很困难。步骤如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备，首先确定必要的软件包组已经安装"><span class="nav-number">2.14.1.</span> <span class="nav-text">准备，首先确定必要的软件包组已经安装:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用-AUR-工具就下载到需要的编译文件。"><span class="nav-number">2.14.2.</span> <span class="nav-text">获取软件包构建所需文件，通过搜索或任何方式，在AUR中找到要安装的软件包。阅读介绍，检查软件包更新日期，看看别人的评论。确认无误后，下面三种方法可以不用 AUR 工具就下载到需要的编译文件。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建和安装软件包，切换到编译目录，解压缩构建文件。如果是-Git-方式获取，无需解压。"><span class="nav-number">2.14.3.</span> <span class="nav-text">构建和安装软件包，切换到编译目录，解压缩构建文件。如果是 Git 方式获取，无需解压。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xorg117-Catalyst-不支持-xorg-server-1-18"><span class="nav-number">2.14.4.</span> <span class="nav-text">xorg117 Catalyst 不支持 xorg-server 1.18</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装闭源驱动"><span class="nav-number">2.15.</span> <span class="nav-text">安装闭源驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-X"><span class="nav-number">2.16.</span> <span class="nav-text">配置 X</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查安装是否成功"><span class="nav-number">2.17.</span> <span class="nav-text">检查安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用篇"><span class="nav-number">3.</span> <span class="nav-text">应用篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装字体"><span class="nav-number">3.1.</span> <span class="nav-text">安装字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Gnome，和catalyst存在兼容性问题。"><span class="nav-number">3.2.</span> <span class="nav-text">安装Gnome，和catalyst存在兼容性问题。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装kde5"><span class="nav-number">3.3.</span> <span class="nav-text">安装kde5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装其他软件包"><span class="nav-number">3.4.</span> <span class="nav-text">安装其他软件包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装firefox火狐浏览器："><span class="nav-number">3.5.</span> <span class="nav-text">安装firefox火狐浏览器：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装办公套件："><span class="nav-number">3.6.</span> <span class="nav-text">安装办公套件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装下载工具："><span class="nav-number">3.7.</span> <span class="nav-text">安装下载工具：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
