@@ -5,6 +5,7 @@
     
     
     
+    
   <url>
     <loc>http://yoursite.com/2016/12/25/%E6%B5%B7%E7%87%95/</loc>
     <lastmod>2017-05-01T13:30:45.688Z</lastmod>
@@ -14,26 +15,6 @@
         <pubTime>2016-12-25T02:04:07.000Z</pubTime>
         
         <tag>高尔基</tag>
-         
-         
-           
-             
-              <breadCrumb title="文学" url="http://yoursite.com/categories/%E6%96%87%E5%AD%A6/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2016/11/24/William-Shakespeare/</loc>
-    <lastmod>2017-05-01T13:30:45.654Z</lastmod>
-    <data>
-        <display>
-        <title>William-Shakespeare</title>
-        <pubTime>2016-11-24T07:44:40.000Z</pubTime>
-        
-        <tag>Shakespeare</tag>
          
          
            
@@ -59,6 +40,26 @@
            
              
               <breadCrumb title="极客" url="http://yoursite.com/categories/%E6%9E%81%E5%AE%A2/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2016/11/24/William-Shakespeare/</loc>
+    <lastmod>2017-05-01T13:30:45.654Z</lastmod>
+    <data>
+        <display>
+        <title>William-Shakespeare</title>
+        <pubTime>2016-11-24T07:44:40.000Z</pubTime>
+        
+        <tag>Shakespeare</tag>
+         
+         
+           
+             
+              <breadCrumb title="文学" url="http://yoursite.com/categories/%E6%96%87%E5%AD%A6/"/>
           
         </display>
     </data>
